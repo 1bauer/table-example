@@ -1,0 +1,20 @@
+<input type="text" placeholder="Liste filtern..." (keyup)="searchValueChange($event)">
+
+<table *ngIf="{sortedBy: $sortedBy | async } as obs">
+    <tr>
+        <th *ngFor="let column of columns" (click)="sortByChange(column)">{{column}}
+            <span *ngIf="obs?.sortedBy?.column == column && obs?.sortedBy?.direction == 'asc'">↓</span>
+            <span *ngIf="obs?.sortedBy?.column == column && obs?.sortedBy?.direction == 'desc'">↑</span>
+        </th>
+    </tr>
+    <tr *ngFor="let entity of $displayData | async">
+
+        <td *ngFor="let column of columns" contentEditable="true" (blur)="onContentChange(entity,column , $event)">
+            {{entity[column]}} </td>
+    </tr>
+</table>
+
+<select *ngIf="$paginationDisplayValue | async as paginationDisplayValue" (ngModelChange)="paginationChange($event)"
+    [ngModel]="$paginationPage | async">
+    <option *ngFor="let item of paginationDisplayValue" [ngValue]="item.value">{{item.name}}</option>
+</select>

@@ -1,27 +1,43 @@
-# TableExample
+ Angular Table with Multiple Features
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.6.
 
-## Development server
+Requirements:
+1. The table should be created using Angular components and directives.
+-> Splitted solution into presentational and container components
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+2. The table receives the columns and the data as Input.
+-> Settings up @Input properties and handing over data via data-binding
 
-## Code scaffolding
+3. The table should fetch data from an API and display it in the table.
+-> Created two central services for data and passing it to the presentational component
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+4. The table should support sorting by clicking on column headers.
+-> Click event on the column header changes the filter state which results in new data
 
-## Build
+5. The table should support filtering by a search term entered by the user.
+-> Input field added. Changes on the field will result in an updated state.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+6. The table should support pagination to display a limited number of rows at a time.
+-> Setting up @Input property. Filtering data when page is changed. Calculation maxpages depending on data and maxitems.
 
-## Running unit tests
+7. The table should allow users to edit and update data directly from the table.
+-> Make data via html editable. Making track of changes happening to the ui and persistet new data.
+ToDo: Create Eventemitter to inform container components about the changed data
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+8. The table should be configurable to work with different datasets and column
+configurations.
+-> Creating everything flexible.
 
-## Running end-to-end tests
+9. (Nice to have) The table should support drag and drop to reorder rows.
+-> Skiped
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+10. (Nice to have) The table should allow users to reorder and resize columns.
+-> Skiped
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+To run the solution you need the following:
+
+- Install nodejs
+- Run "npm install"
+- Run "npm install -g @angular/cli"
+- Run "npm start"
