@@ -2,7 +2,7 @@
 
 <table *ngIf="{sortedBy: $sortedBy | async } as obs">
     <tr>
-        <th *ngFor="let column of columns" (click)="sortBy(column)">{{column}}
+        <th *ngFor="let column of columns" (click)="sortByChange(column)">{{column}}
             <span *ngIf="obs?.sortedBy?.column == column && obs?.sortedBy?.direction == 'asc'">↓</span>
             <span *ngIf="obs?.sortedBy?.column == column && obs?.sortedBy?.direction == 'desc'">↑</span>
         </th>

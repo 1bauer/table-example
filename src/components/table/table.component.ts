@@ -34,7 +34,8 @@ export class TableComponent {
         }
       }
       return newdata;
-    } else {
+    }
+    else {
       return data;
     }
   }))
@@ -74,9 +75,6 @@ export class TableComponent {
     return displayvalue;
   }))
 
-
-
-
   //data which get displayed in component
   $displayData: Observable<any> = combineLatest([this.$filteredData, this.$itemsPerPage, this.$paginationPage, this.$sortedBy, this.$searchValue]).pipe(map(([data, itemsPerPage, currentpage, sorting]) => {
     if (!data) {
@@ -85,14 +83,13 @@ export class TableComponent {
 
     let diplaydata = [...data];
 
-
-
     if (sorting?.direction === 'asc') {
       diplaydata?.sort((a: any, b: any) => (a[sorting.column] > b[sorting.column]) ? 1 : ((b[sorting.column] > a[sorting.column]) ? -1 : 0))
     }
     else if (sorting?.direction === 'desc') {
       diplaydata?.sort((a: any, b: any) => (a[sorting.column] < b[sorting.column]) ? 1 : ((b[sorting.column] < a[sorting.column]) ? -1 : 0))
     }
+
     if (typeof itemsPerPage === "number" && typeof currentpage === "number") {
 
       const start = itemsPerPage * currentpage;
@@ -100,20 +97,17 @@ export class TableComponent {
       diplaydata = data.slice(start, end)
     }
 
-
     return diplaydata;
-
   }))
 
   //Inputs
+  /** Number of max items per page */
   @Input() set itemsPerPage(value: number | undefined) {
     this._itemsPerPage.next(value);
     this._paginationPage.next(0);
   }
 
-
-
-
+  /** Data Collection to get visualised */
   @Input() set data(value: any) {
     this._data.next(value);
     this._sortedBy.next(undefined);
@@ -126,16 +120,11 @@ export class TableComponent {
     return this._data;
   }
 
-
-
-
-
-
+  /** Columns of the Collection to get visualised */
   @Input()
   columns: string[] = [];
 
-
-  sortBy(column: string): void {
+  sortByChange(column: string): void {
     let value: { column: string; direction: "asc" | "desc"; } | undefined = undefined;
 
     const currentvalue = this._sortedBy.value;
@@ -151,13 +140,11 @@ export class TableComponent {
     this._sortedBy.next(value);
   }
 
-
   paginationChange(value: number) {
     this._paginationPage.next(value);
   }
 
   onContentChange(entity: any, column: string, data: any) {
-
     const newdata = [...this._data.value]
     const index = newdata.indexOf(entity);
     if (newdata[index][column] !== data.target.outerText) {
